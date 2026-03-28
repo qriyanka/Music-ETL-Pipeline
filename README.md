@@ -1,41 +1,63 @@
 # Music-ETL-Pipeline
 ETL pipeline combining Last.fm API data to A/B test music popularity across decades using Python, Pandas, SQLite and SciPy
 
+Built this to answer a question: Are 2020s artists holding up better on 
+streaming than 2010s artists, or is it just algorithm bias?
 
-# Music Era A/B Test — ETL Pipeline
+I pulled data from the Last.fm API, cleaned it, loaded it into SQLite, then ran 
+a full A/B test suite to find out.
 
-An end-to-end ETL pipeline that extracts music data from the Last.fm API, 
-transforms it with Python, loads it into a SQLite database, and runs 
-statistical A/B testing to compare music popularity across decades.
+## what this project does
 
-## Research Question
-Are 2020s artists more popular than 2010s artists on Last.fm today?
+- hits the Last.fm API for artist stats and top tracks across 10 artists
+- normalizes playcount into a 0-100 popularity score
+- loads cleaned data into a SQLite database via SQLAlchemy
+- runs 4 layers of statistical testing to validate results
+- generates charts and styled tables to visualize findings
 
-## A/B Test Design
-| | Group A | Group B |
+## a/b test design
+
+**Group A (2010s):** Drake, Rihanna, Kanye West, Beyoncé, Eminem
+
+**Group B (2020s):** Taylor Swift, Bad Bunny, The Weeknd, Olivia Rodrigo, Doja Cat
+
+**Hypothesis:** 2020s artists are more popular on Last.fm today than 2010s artists
+
+## tests run
+
+**1. T-test**
+checks if the difference in popularity scores between eras is 
+statistically significant or not
+result: p=0.001, significant across all 3 metrics (popularity, listeners, playcount)
+
+**2. Effect size (Cohen's D)**
+T-test shows if the difference is real and Cohen's D shows HOW BIG it is
+- popularity score: d=-0.71 meaning medium effect
+- listeners: d=1.021 meaning large effect
+- playcount: d=-0.71 meaning medium effect
+
+**3. Artist-level breakdown**
+drilled into which specific artists are driving each era's score
+found that 2020s is carried by Taylor Swift and The Weeknd
+2010s is held back by Beyoncé (22.22) and Bad Bunny underperforms at 21.42
+
+**4. Confidence intervals (95%)**
+2010s: 29.94 to 38.87
+2020s: 41.59 to 53.47
+intervals don't overlap 
+
+## results
+
+| metric | 2010s | 2020s |
 |---|---|---|
-| **Era** | 2010s | 2020s |
-| **Artists** | Drake, Rihanna, Kanye West, Beyoncé, Eminem | Taylor Swift, Bad Bunny, The Weeknd, Olivia Rodrigo, Doja Cat |
-| **Metric** | Popularity Score (normalized playcount) | Popularity Score (normalized playcount) |
+| avg popularity score | 34.41 | 47.53 |
+| avg listeners | 6.2M | 4.0M |
+| avg playcount | 16.7M | 23.1M |
 
-## Results
-- **2010s Average Score:** 34.41
-- **2020s Average Score:** 47.53
-- **P-value:** 0.001
-- **Conclusion:** Statistically significant: 2020s artists are genuinely more popular on Last.fm today
+finding: 2010s artists have more total listeners but 2020s artists 
+get played more per listener. wider reach vs deeper engagement.
 
-## Tech Stack
-- Python
-- Pandas
-- SQLAlchemy
-- SQLite
-- SciPy
-- Matplotlib
-- Last.fm API
-- Google Colab
+## stack
 
-  ## 💡 Key Findings
-- 2020s artists score 38% higher than 2010s artists
-- Taylor Swift and The Weeknd are the top performers overall
-- 2010s artists show more consistent but lower popularity
-- 2020s artists show higher variance: some very high, some very low
+python · pandas · sqlalchemy · sqlite · scipy · matplotlib · last.fm api
+
