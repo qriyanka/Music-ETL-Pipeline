@@ -22,7 +22,7 @@ Are 2020s artists more popular than 2010s artists on Last.fm today?
 - **2010s Average Score:** 34.41
 - **2020s Average Score:** 47.53
 - **P-value:** 0.001
-- **Conclusion:** Statistically significant — 2020s artists are genuinely more popular on Last.fm today
+- **Conclusion:** Statistically significant: 2020s artists are genuinely more popular on Last.fm today
 
 ## Tech Stack
 - Python
@@ -38,4 +38,4 @@ Are 2020s artists more popular than 2010s artists on Last.fm today?
 - 2020s artists score 38% higher than 2010s artists
 - Taylor Swift and The Weeknd are the top performers overall
 - 2010s artists show more consistent but lower popularity
-- 2020s artists show higher variance — some very high, some very low
+- 2020s artists show higher variance: some very high, some very low
