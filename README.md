@@ -116,15 +116,7 @@ Databricks SQL Editor.
 ### Top Tracks by Artist
 ![Top Tracks](screenshots/top_tracks_by_artist.png)
 
-## How to Run
 
-1. Clone this repo
-2. Install dependencies: `pip install -r requirements.txt`
-3. Add your Last.fm API key to cell 2 of the notebook
-4. Run all cells in `notebooks/Music_ETL_Pipeline.ipynb`
-5. CSV exports automatically to the same directory
-6. Upload CSV to Databricks Unity Catalog volume
-7. Run SQL files in `sql/` folder in Databricks SQL Editor
 
 ## What I'd Add Next
 
