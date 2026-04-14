@@ -87,6 +87,8 @@ engagement.
 
 ## Databricks Delta Lake
 
+** need to come back to this to upload the visuals from databricks
+
 ![Delta Table](screenshots/databricks_delta_table.png)
 
 Data is stored as a managed Delta table in Unity Catalog 
